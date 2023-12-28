@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0px;
+            padding: 0px;
+            width: 100vw;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: lightgray;
+        }
+        nav{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: dodgerblue;
+        }
+        .title{
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .pages{
+            width: 100%;
+            height: 50px;
+            background-color: lightskyblue;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .pagesActive{
+            background-color: dodgerblue;
+            color: white;
+        }
+        .pages>div{
+            border: 1px solid black;
+            padding: 6px;
+            border-radius: 5px;
+        }
+        .cards{
+            width: 100%;
+            height: auto;
+            padding: 20px;
+            background-color: lightgray;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="title">天氣狀況</div>
+    </nav>
+    <div class="pages">
+        <div class="area all">全部</div>
+        <div class="area north">北部</div>
+        <div class="area center">中部</div>
+        <div class="area east">東部</div>
+        <div class="area south">南部</div>
+        <div class="area island">離島</div>
+    </div>
+    <div class="cards"></div>
+
+    <script>
+        let sunny = './pic/sunbeams.png';
+        let rainy = './pic/raining.png';
+        let cloudy = './pic/sun-cloud.png';
+        let cards = document.querySelector('.cards');
+        let pages = document.querySelectorAll('.area');
+        let card = [];
+        let northArea = ['臺北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣'];
+        let centerArea = ['苗栗縣','臺中市','彰化縣','南投縣','雲林縣'];
+        let eastArea = ['花蓮縣','臺東縣'];
+        let southArea = ['嘉義市','嘉義縣','臺南市','高雄市','屏東縣','澎湖縣'];
+        let islandArea = ['金門縣','連江縣'];
+        
+        class WeatherCard{
+            constructor( picture, area, degree, about ) {
+                this.picture = picture;
+                this.area = area;
+                this.degree = degree;
+                this.about = about;
+            }
+            
+            area(){
+                return this.area;
+            }
+            
+            turnDiv(){
+                let newDiv = document.createElement('div');
+                let img = document.createElement('div');
+                let textDiv = document.createElement('p');
+                
+                newDiv.style.width = '200px';
+                newDiv.style.height = '300px';
+                newDiv.style.backgroundColor = 'cadetblue';
+                newDiv.style.border = '1px solid black';
+                newDiv.style.borderRadius = '10px';
+                newDiv.style.display = 'flex';
+                newDiv.style.flexDirection = 'column';
+                newDiv.style.justifyContent = 'space-evenly';
+                newDiv.style.alignItems = 'center';
+                newDiv.style.padding = '20px';
+                newDiv.classList.add('card');
+                
+                img.style.width = '100%';
+                img.style.height = '200px';
+                img.style.backgroundImage = 'url('+this.picture+')';
+                img.style.zIndex = '1';
+                img.style.backgroundRepeat = 'no-repeat';
+                img.style.backgroundPosition = 'center';
+                img.style.backgroundSize = 'cover';
+                textDiv.style.color = 'white';
+                textDiv.innerHTML = '地區：' + this.area + '</br>溫度：' + this.degree + '</br>' + this.about;
+                
+                newDiv.appendChild(img);
+                newDiv.appendChild(textDiv);
+                return newDiv;
+            }
+        }
+
+        function switchPages(current){
+            pages.forEach(function(i){
+                i.classList.remove('pagesActive');
+                cards.innerHTML= '';
+            });
+            this.classList.add('pagesActive');
+            
+            switch(this.classList[1]){
+                case 'north':
+                    card.forEach(function(c){
+                        if (northArea.includes(c.area)){
+                            cards.appendChild(c.turnDiv());
+                        }
+                    });
+                    break;
+                case 'center':
+                    card.forEach(function(c){
+                        if (centerArea.includes(c.area)){
+                            cards.appendChild(c.turnDiv());
+                        }
+                    });
+                    break;
+                case 'east':
+                    card.forEach(function(c){
+                        if (eastArea.includes(c.area)){
+                            cards.appendChild(c.turnDiv());
+                        }
+                    });
+                    break;
+                case 'south':
+                    card.forEach(function(c){
+                        if (southArea.includes(c.area)){
+                            cards.appendChild(c.turnDiv());
+                        }
+                    });
+                    break;
+                case 'island':
+                    card.forEach(function(c){
+                        if (islandArea.includes(c.area)){
+                            cards.appendChild(c.turnDiv());
+                        }
+                    });
+                    break;
+                default:
+                    card.forEach(function(c){
+                        cards.appendChild(c.turnDiv());
+                    });
+            };
+            
+        }
+        
+        
+        fetch('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-84613A7F-DD4A-419E-A777-5DC9022DF795&format=JSON').then(function(response){
+            return response.json();
+        }).then(function(data){
+            data.records.location.forEach(function(i){
+                let area = i.locationName;
+                let weather = i.weatherElement[0].time[0].parameter.parameterName;
+                let degree = i.weatherElement[2].time[0].parameter.parameterName + '°' +i.weatherElement[2].time[0].parameter.parameterUnit;
+                let pic = sunny;
+                if ( weather.includes('晴天') ){
+                    pic = sunny;
+                }
+                else if (weather.includes('雨')){
+                    pic = rainy;
+                }
+                else {
+                    pic = cloudy;
+                }
+                let newCard = new WeatherCard( pic, area, degree, weather);
+                card.push(newCard);
+            });
+            card.forEach(function(c){
+                cards.appendChild(c.turnDiv());
+            });
+        });
+
+        pages.forEach(function(page){
+            page.addEventListener('click',switchPages);
+        });
+        
+        </script>
+</body>
+
+</html>

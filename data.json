@@ -1,0 +1,27 @@
+[
+    {
+        "name": "微軟仿切",
+        "address": "./microsoft/microsoft.html",
+        "explanation": "利用純HTML/CSS，<br>做出微軟頁面的架構仿切。<br>"
+    },
+    {
+        "name": "色弱測驗",
+        "address": "./color-weakness-test/cwt.html",
+        "explanation": "除HTML基本架構外，<br>挑戰全部用JavaScript生成標籤，<br>生成無限調整難度的色弱測驗遊戲。<br>"
+    },
+    {
+        "name": "便利貼試作(未完成)",
+        "address": "./vue/postIt.html",
+        "explanation": "以Vue CDN方式，試做電腦HTML的onDrag功能。<br>"
+    },
+    {
+        "name": "API串接天氣小卡",
+        "address": "./weather-cards/fetch.html",
+        "explanation": "試作開放API之串接。<br>"
+    },
+    {
+        "name": "店家形象網站(未採用)",
+        "address": "https://11109-sy-timemachine.dev-hub.io/",
+        "explanation": "職訓專題成果發表，<br>採用Vue.js CDN與Swiper.js等框架開發。<br>"
+    }
+]

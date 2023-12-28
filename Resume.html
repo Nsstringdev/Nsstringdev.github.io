@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Resume.css">
+</head>
+<body>
+    <div id="collision"></div>
+    <div id="contents">
+        <nav>
+            <div id="title">
+                <p id="title1">Gamer Journey</p>
+                <p id="title2">Better way to play the game of life.</p>
+            </div>
+            <div id="photo">
+                <img src="./IMG_1332.jpeg" alt="">
+            </div>
+        </nav>
+        <div id="skills"></div>
+        <div id="projects"></div>
+        <div id="experiences"></div>
+        <div id="introduces"></div>
+        <div id="anchors"></div>
+        <footer></footer>
+    </div>
+    <script>
+        class ball {
+            constructor (radius, x, y) {
+                this.radius = radius;
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        let box = document.getElementById("collision");
+        let balls = [];
+
+        function getRadius(){
+            let x = document.body.offsetWidth;
+            let y = document.body.offsetHeight;
+
+            if (x > y) {
+                return Math.floor(y/7);
+            }
+            else {
+                return Math.floor(x/7);
+            }
+        }
+
+        document.addEventListener("click", function (e){
+            let newBall = document.createElement("div");
+            newBall.style.backgroundColor = "#aaabd3";
+            newBall.style.display = "flex";
+            newBall.style.position = "absolute";
+            newBall.style.left = (e.clientX - getRadius()/2) + "px";
+            newBall.style.top = (e.clientY - getRadius()/2) + "px";
+            newBall.style.width = getRadius() + "px";
+            newBall.style.height = getRadius() + "px";
+            box.appendChild(newBall);
+        });
+    </script>
+</body>
+</html>
