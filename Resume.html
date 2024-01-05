@@ -27,10 +27,46 @@
     </div>
     <script>
         class ball {
-            constructor (radius, x, y) {
-                this.radius = radius;
-                this.x = x;
-                this.y = y;
+            constructor (radius, left, top, div) {
+                this.radius = radius; //半徑
+                this.left = left; //X座標
+                this.top = top; //-Y座標
+                this.degree = Math.random()*(2*Math.PI);
+                this.vLeft = Math.cos(this.degree);
+                this.vTop = Math.sin(this.degree)*-1;
+            }
+
+            collideBall(ball2) {
+                let distance = (this.left - ball2.left)**2 + (this.top - ball2.top)**2 ;
+
+                if ((this.radius + ball2.radius)**2 >= distance ) {
+                    let tempLeft = this.vLeft;
+                    let tempTop = this.vTop;
+                    this.vLeft = ball2.vLeft;
+                    this.vTop = ball2.vTop;
+                    ball2.vLeft = tempLeft;
+                    ball2.vTop = tempTop;
+                    return true;
+                } 
+                else {
+                    return false;
+                }
+            }
+
+            collideWall() {
+                let buffer = 50;
+                if (
+                    this.top-this.radius <= 0 +buffer||
+                    this.top+this.radius >= document.body.offsetHeight-buffer
+                ){
+                    this.vTop *= -1; 
+                }
+                else if (
+                    this.left-this.radius <= 0 +buffer||
+                    this.left+this.radius >= document.body.offsetWidth-buffer 
+                ) {
+                    this.vLeft *= -1;
+                }
             }
         }
 
@@ -42,10 +78,10 @@
             let y = document.body.offsetHeight;
 
             if (x > y) {
-                return Math.floor(y/7);
+                return Math.floor(y/14);
             }
             else {
-                return Math.floor(x/7);
+                return Math.floor(x/14);
             }
         }
 
@@ -54,12 +90,45 @@
             newBall.style.backgroundColor = "#aaabd3";
             newBall.style.display = "flex";
             newBall.style.position = "absolute";
-            newBall.style.left = (e.clientX - getRadius()/2) + "px";
-            newBall.style.top = (e.clientY - getRadius()/2) + "px";
-            newBall.style.width = getRadius() + "px";
-            newBall.style.height = getRadius() + "px";
+
+            let newBallAttr = new ball(getRadius(), e.clientX, e.clientY, newBall); 
+
+            newBall.style.left = newBallAttr.left - newBallAttr.radius + "px";
+            newBall.style.top = newBallAttr.top - newBallAttr.radius + "px";
+            newBall.style.width = newBallAttr.radius*2 + "px";
+            newBall.style.height = newBallAttr.radius*2 + "px";
+            newBall.style.borderRadius = newBallAttr.radius + "px";
+
+            balls.push(newBallAttr);
             box.appendChild(newBall);
         });
+
+        //對window下setInterval，讓balls動起來。
+        window.setInterval(function(){
+            box.innerHTML = "";
+            balls.forEach((ball) => {
+                ball.left += ball.vLeft*2;
+                ball.top += ball.vTop*2;
+
+                for (let i = 0 ; i<balls.length ; i++){
+                    if (balls[i].top !== ball.top){
+                        ball.collideBall(balls[i]);
+                    }
+                }
+                ball.collideWall();
+
+                let newBall = document.createElement("div");
+                newBall.style.backgroundColor = "#aaabd3";
+                newBall.style.display = "flex";
+                newBall.style.position = "absolute";
+                newBall.style.left = ball.left - ball.radius + "px";
+                newBall.style.top = ball.top - ball.radius + "px";
+                newBall.style.width = ball.radius*2 + "px";
+                newBall.style.height = ball.radius*2 + "px";
+                newBall.style.borderRadius = ball.radius + "px";
+                box.appendChild(newBall);
+            });
+        },10);
     </script>
 </body>
 </html>

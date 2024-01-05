@@ -18,6 +18,15 @@ body{
     height: 100dvh;
     background-color: #f8faff;
 }
+.ballMoves{
+    position: absolute;
+    -moz-transition: all 50ms;
+    -webkit-transition: all 50ms;
+    -ms-transition: all 50ms;
+    -o-transition: all 50ms;
+    transition: all 50ms;
+}
+
 #contents{
     width: 100%;
     height: auto;

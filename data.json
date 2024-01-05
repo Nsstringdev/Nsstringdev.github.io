@@ -10,18 +10,13 @@
         "explanation": "除HTML基本架構外，<br>挑戰全部用JavaScript生成標籤，<br>生成無限調整難度的色弱測驗遊戲。<br>"
     },
     {
-        "name": "便利貼試作(未完成)",
-        "address": "./vue/postIt.html",
-        "explanation": "以Vue CDN方式，試做電腦HTML的onDrag功能。<br>"
-    },
-    {
         "name": "API串接天氣小卡",
         "address": "./weather-cards/fetch.html",
         "explanation": "試作開放API之串接。<br>"
     },
     {
-        "name": "店家形象網站(未採用)",
-        "address": "https://11109-sy-timemachine.dev-hub.io/",
-        "explanation": "職訓專題成果發表，<br>採用Vue.js CDN與Swiper.js等框架開發。<br>"
+        "name": "個人履歷(設計中)",
+        "address": "./Resume.html",
+        "explanation": "職訓專題成果發表，設計中個人網頁"
     }
 ]
