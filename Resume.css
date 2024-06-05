@@ -79,13 +79,138 @@ nav {
     object-fit: cover;
     object-position: center top;
 }
+#anchors{
+    width: calc(100dvw - 550px);
+    height: 350px;
+    right: 100px;
+    bottom: 120px;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
-@media (max-width:1280px) {
-    
+#anchors > a {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: #CBA6C3;
+    color: #353866;
+    text-shadow: 0.1em 0.1em 0.05em white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
 }
-@media (max-width:700px) {
-    
+
+@media (max-width:1200px) {
+    nav {
+        width: calc(100dvw - 100px);
+        height: calc(100dvh - 60px);
+        position: relative;
+        margin: 30px 50px 30px 50px;
+    }
+
+    #photo {
+        left: calc( 50% - 150px );
+        bottom: 0px;
+    }
+
+    #anchors{
+        width: calc(100dvw - 100px);
+        height: calc(50dvh - 30px);
+        left: 50px;
+        bottom: 50px;
+        align-items:flex-end;
+    }
+
+    #projectsAnchor{
+        position: absolute;
+        bottom: 190px;
+        left: calc(33dvw - 120px);
+    }
+
+    #experiencesAnchor{
+        align-self: flex-start;
+    }
+
+    #introducesAnchor{
+        position: absolute;
+        bottom: 190px;
+        right: calc(33dvw - 120px);
+    }
+
 }
-@media (max-width:400px) {
+@media (max-width:850px) {
+    #title {
+        padding: 10px;
+    }
+
+    #title1 {
+        font-size: 70px;
+    }
+
+    #title2 {
+        font-size: 35px;
+    }
+
+    #photo {
+        width: 200px;
+        height: 200px;
+        left: calc( 50% - 100px );
+    }
+
+    #anchors {
+        height: calc(40dvh - 50px);
+    }
+
+    #anchors > a {
+        width: 80px;
+        height: 80px;
+        font-size: 20px;
+    }
+
+    #projectsAnchor {
+        bottom: 140px;
+        left: calc(33dvw - 100px);
+    }
+
+    #introducesAnchor {
+        bottom: 140px;
+        right: calc(33dvw - 100px);
+    }
+
+}
+
+@media (max-width:550px) {
+    #title1 {
+        font-size: 50px;
+    }
+
+    #title2 {
+        font-size: 25px;
+    }
     
+    #photo {
+        width: 120px;
+        height: 120px;
+        left: calc( 50% - 60px );
+        bottom: 30px;
+    }
+
+    #anchors {
+        height: calc(35dvh - 50px);
+    }
+    #projectsAnchor {
+        bottom: 110px;
+        left: calc(33dvw - 100px);
+    }
+
+    #introducesAnchor {
+        bottom: 110px;
+        right: calc(33dvw - 100px);
+    }
 }
