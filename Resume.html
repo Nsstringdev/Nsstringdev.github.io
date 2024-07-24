@@ -17,6 +17,9 @@
             <div id="photo">
                 <img src="./IMG_1332.jpeg" alt="">
             </div>
+            <div id="hint">
+                <p>Click picture to start ball game in background.</p>
+            </div>
         </nav>
         <div id="anchors">
             <a id="skillsAnchor" href="#skills">技能</a>
@@ -111,6 +114,10 @@
 
         let box = document.getElementById("collision");
         let balls = [];
+        let ballStart = false;
+        let secondBallClick = false;
+        let photo = document.getElementById("photo");
+        let hint = document.getElementById("hint")
 
         function getRadius(){
             let x = document.body.offsetWidth;
@@ -128,23 +135,15 @@
         document.addEventListener("click", function (e){
             let r = getRadius();
 
-            if ( (e.clientX - r) < 0 || (e.clientX + r) > document.body.offsetWidth || (e.clientY - r) < 0 || (e.clientY + r) > document.body.offsetHeight ) {
-                //do nothing
+            if (ballStart === true && secondBallClick === false){
+                secondBallClick = true;
             }
-            else {
+            else if ( (e.clientX - r) > 0 && (e.clientX + r) < document.body.offsetWidth && (e.clientY - r) > 0 && (e.clientY + r) < document.body.offsetHeight && balls.length < 5 && ballStart === true ) {
+                hint.style.display = "none";
                 let newBall = document.createElement("div");
-                newBall.style.backgroundColor = "#aaabd3";
-                newBall.style.display = "flex";
-                newBall.style.position = "absolute";
     
                 let newBallAttr = new ball(r, e.clientX, e.clientY, newBall); 
-    
-                newBall.style.left = newBallAttr.left - newBallAttr.radius + "px";
-                newBall.style.top = newBallAttr.top - newBallAttr.radius + "px";
-                newBall.style.width = newBallAttr.radius*2 + "px";
-                newBall.style.height = newBallAttr.radius*2 + "px";
-                newBall.style.borderRadius = newBallAttr.radius + "px";
-    
+
                 balls.push(newBallAttr);
                 box.appendChild(newBall);
             }
@@ -175,9 +174,16 @@
                 newBall.style.width = ball.radius*2 + "px";
                 newBall.style.height = ball.radius*2 + "px";
                 newBall.style.borderRadius = ball.radius + "px";
+                newBall.style.boxShadow = "3px 3px 3px 3px rgba(0,0,0,0.2)"
                 box.appendChild(newBall);
             });
         },10);
+
+
+        photo.addEventListener("click", function(e) {
+            ballStart = true;
+            hint.innerHTML = "<p>Try to click background!</p>";
+        })
     </script>
 </body>
 </html>
