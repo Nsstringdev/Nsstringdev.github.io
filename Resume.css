@@ -17,14 +17,16 @@ body{
     width: 100dvw;
     height: 100dvh;
     background-color: #f8faff;
+    position: relative;
+    top: 0px;
 }
 
 #contents{
     width: 100%;
     height: auto;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 0px;
+    top: 0px;
 }
 nav {
     width: calc(100dvw - 200px);
@@ -131,7 +133,6 @@ nav {
     width: 100dvw;
     height: 100dvh;
     position: relative;
-    background-color: #f8faff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,11 +188,61 @@ nav {
 }
 
 #pages > div {
-    width: 40%;
+    width: 45%;
     height: 90%;
     position: relative;
     border: 2px solid #353866;
     border-radius: 20px;
+}
+
+#introduces {
+    width: 100dvw;
+    height: 100dvh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#introducesBoard {
+    width: calc(100dvw - 140px);
+    height: calc(100dvh - 140px);
+    position: relative;
+    background-color: #CBA6C3;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    width: 100dvw;
+    height: 100dvh;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#criticalTitle {
+    width: calc(50dvw - 140px);
+    height: calc(100dvh - 140px);
+    position: relative;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footerBoard {
+    width: calc(50dvw - 140px);
+    height: calc(100dvh - 140px);
+    position: relative;
+    background-color: #CBA6C3;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width:1200px) {

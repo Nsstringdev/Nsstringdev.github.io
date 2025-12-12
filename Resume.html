@@ -23,7 +23,7 @@
             <div id="anchors">
                 <a id="projectsAnchor" href="#projects">過往<br>專案</a>
                 <a id="introducesAnchor" href="#introduces">自介<br>興趣</a>
-                <a id="footerAnchor" href="footer">聯絡<br>方式</a>
+                <a id="footerAnchor" href="#siteFooter">聯絡<br>方式</a>
             </div>
         </nav>
         <div id="projects">
@@ -45,8 +45,13 @@
                 </div>
             </div>
         </div>
-        <div id="introduces"></div>
-        <footer></footer>
+        <div id="introduces">
+            <div id="introducesBoard"></div>
+        </div>
+        <footer id="siteFooter">
+            <div id="criticalTitle"></div>
+            <div id="footerBoard"></div>
+        </footer>
     </div>
     <script>
         //預設一個ball的類別，以建立陣列儲存ball物件。
@@ -96,7 +101,7 @@
             collideWall() {
                 let buffer = 0;
                 if (
-                    this.top-this.radius <= 0 +buffer
+                    this.top-this.radius <= 0 + buffer
                 ){
                     this.vTop *= -1;
                     this.top = this.radius + buffer + 0 ;
@@ -166,6 +171,8 @@
         //對window下setInterval，讓balls動起來。
         window.setInterval(function(){
             box.innerHTML = "";
+            box.style.position = "relative";
+            box.style.top = window.scrollY+"px";
             balls.forEach((ball) => {
                 ball.left += ball.vLeft*2;
                 ball.top += ball.vTop*2;
