@@ -46,7 +46,9 @@
             </div>
         </div>
         <div id="introduces">
-            <div id="introducesBoard"></div>
+            <div id="introducesBoard">
+                <canvas id="canvas"></canvas>
+            </div>
         </div>
         <footer id="siteFooter">
             <div id="criticalTitle"></div>
@@ -137,6 +139,8 @@
         let secondBallClick = false;
         let photo = document.getElementById("photo");
         let hint = document.getElementById("hint")
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
 
         function getRadius(){
             let x = document.body.offsetWidth;
@@ -204,7 +208,58 @@
         photo.addEventListener("click", function(e) {
             ballStart = true;
             hint.innerHTML = "<p>Try to click background!</p>";
+            const cwidth = canvas.width = window.innerWidth;
+            const cheight = canvas.height = window.innerHeight;
+
+            flake(0,0,1512,0,0,4);
         })
+
+        // canvas snow flake
+
+
+        function flake (xa, ya, xe, ye, a, f){
+            if (f == 0) {
+                ctx.beginPath();
+                ctx.moveTo(xa, ya);
+                ctx.lineTo(xe, ye);
+                ctx.stroke();
+            } 
+            else if (f > 0){
+                if (a < 0) {
+                    a += 360;
+                }
+                else if (a > 360) {
+                    a -= 360;
+                }
+                let xb = Math.floor(((xe-xa)/3)+xa);
+                let yb = Math.floor(((ye-ya)/3)+ya);
+                let xd = xb*2-xa;
+                let yd = yb*2-ya;
+                let r = Math.floor(Math.sqrt((((xe-xa)/3)**2) + (((ye-ya)/3)**2)));
+                let na = a+60;
+                if (na >= 360) {
+                    na -= 360;
+                }
+                let xc = Math.floor((r * Math.cos((na/360)*2*Math.PI)))+xb;
+                let yc = Math.floor((r * Math.sin((na/360)*2*Math.PI)))+yb;
+
+                flake(xa,ya,xb,yb,a,f-1);
+                
+                na = a+60;
+                if (na >= 360) {
+                    na -= 360;
+                }
+                flake(xb,yb,xc,yc,na,f-1);
+
+                na = a-60;
+                if (na < 0) {
+                    na += 360;
+                };
+                flake(xc,yc,xd,yd,na,f-1);
+
+                flake(xd,yd,xe,ye,a,f-1);
+            }
+        }
     </script>
 </body>
 </html>

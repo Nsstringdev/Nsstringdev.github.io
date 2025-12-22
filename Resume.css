@@ -215,6 +215,13 @@ nav {
     align-items: center;
 }
 
+#canvas {
+    width: 90%;
+    height: 90%;
+    position: relative;
+    
+}
+
 footer {
     width: 100dvw;
     height: 100dvh;
